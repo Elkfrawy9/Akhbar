@@ -1,9 +1,10 @@
-##simple app to get news from API with some features
+## simple app to get news from API with some features
 
 i'm working on adding new features
 
 
 ## Languages, libraries and tools used
+- Kotlin
 - Retrofit to get news and used gson converter
 - Room to save specific article
 - Koltin Coroutines
