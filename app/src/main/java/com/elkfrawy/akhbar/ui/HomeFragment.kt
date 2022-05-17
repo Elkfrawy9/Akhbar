@@ -66,9 +66,6 @@ class HomeFragment : Fragment() {
         adapter.onViewClickedListener(object : NewsRecyclerAdapter.onViewClicked {
             override fun onSaveIconClickListener(article: Article) {
                 if (article.saved) {
-                    // the api set it null
-                    if (article.author == null)
-                        article.author = ""
                     viewModel.insert(article)
                 }else{
                     viewModel.delete(article)

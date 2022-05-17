@@ -64,8 +64,6 @@ class SearchFragment : Fragment() {
         adapter.onViewClickedListener(object : NewsRecyclerAdapter.onViewClicked{
             override fun onSaveIconClickListener(article: Article) {
                 if (article.saved) {
-                    if (article.author == null)
-                        article.author = ""
                     viewModel.insert(article)
                 }else{
                     viewModel.delete(article)
