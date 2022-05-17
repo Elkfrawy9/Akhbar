@@ -6,23 +6,41 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.util.function.BinaryOperator
+import androidx.annotation.Nullable
 
 @Entity(tableName = "article")
 data class Article(
+
     @PrimaryKey(autoGenerate = true)
     val id:Int,
+
     var saved: Boolean,
+
     @Embedded val source: Source,
-    var author: String = "",
-    val title: String = "",
-    @ColumnInfo(name = "description")
+
+    @Nullable
+    var author: String?,
+
+    @Nullable
+    val title: String?,
+
     @SerializedName("description")
-    val desc: String = "",
-    val url: String = "",
+    @Nullable
+    val desc: String?,
+
+    val url: String ,
+
     @ColumnInfo(name = "image_url")
     @SerializedName("urlToImage")
-    val imageUrl: String = "",
+    @Nullable
+    val imageUrl: String?,
+
     @SerializedName("publishedAt")
-    val date: String = "",
-    val content: String = "",
+    @ColumnInfo(defaultValue = "")
+    @Nullable
+    val date: String ,
+
+    @ColumnInfo(defaultValue = "")
+    @Nullable
+    val content: String?,
 )

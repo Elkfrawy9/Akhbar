@@ -24,8 +24,9 @@ import javax.inject.Inject
 class SearchFragment : Fragment() {
 
     @Inject lateinit var glide: RequestManager
+    @Inject lateinit var adapter: NewsRecyclerAdapter
+
     lateinit var binding: FragmentSearchBinding
-    lateinit var adapter: NewsRecyclerAdapter
     lateinit var controller: NavController
 
     val viewModel by viewModels<MainViewModel>()

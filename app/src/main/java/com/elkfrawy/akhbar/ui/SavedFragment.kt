@@ -24,16 +24,16 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SavedFragment : Fragment() {
 
-    lateinit var binding: FragmentSavedBinding
-    lateinit var adapter: NewsRecyclerAdapter
+    @Inject lateinit var adapter: NewsRecyclerAdapter
     @Inject lateinit var glid: RequestManager
+
+    lateinit var binding: FragmentSavedBinding
     lateinit var controller: NavController
 
     val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = NewsRecyclerAdapter(requireContext(), glid)
         controller = findNavController()
     }
 

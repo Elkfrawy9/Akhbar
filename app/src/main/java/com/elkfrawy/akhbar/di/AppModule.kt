@@ -18,7 +18,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 @InstallIn(SingletonComponent::class)
 @Module
 class AppModule {
@@ -48,13 +47,13 @@ class AppModule {
     @Singleton
     @Provides
     fun room(@ApplicationContext context: Context) =
-         Room.databaseBuilder(context, ArticleDatabase::class.java, "article").build()
+         Room.
+         databaseBuilder(context, ArticleDatabase::class.java, "article")
+             .fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
     fun getArticle(appDatabase: ArticleDatabase) = appDatabase.getArticleDao()
-
-
 
 
 }

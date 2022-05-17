@@ -24,6 +24,7 @@ import com.elkfrawy.akhbar.MainViewModel
 import com.elkfrawy.akhbar.R
 import com.elkfrawy.akhbar.databinding.FragmentHomeBinding
 import com.elkfrawy.akhbar.model.Article
+import com.elkfrawy.akhbar.model.News
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,8 +32,7 @@ import javax.inject.Inject
 class HomeFragment : Fragment() {
 
     @Inject lateinit var glide: RequestManager
-
-    lateinit var adapter: NewsRecyclerAdapter
+    @Inject lateinit var adapter: NewsRecyclerAdapter
     lateinit var binding: FragmentHomeBinding
     lateinit var controller: NavController
 
@@ -40,7 +40,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = NewsRecyclerAdapter(requireContext(), glide)
         viewModel.getNews()
         controller = findNavController()
     }
@@ -67,6 +66,7 @@ class HomeFragment : Fragment() {
         adapter.onViewClickedListener(object : NewsRecyclerAdapter.onViewClicked {
             override fun onSaveIconClickListener(article: Article) {
                 if (article.saved) {
+                    // the api set it null
                     if (article.author == null)
                         article.author = ""
                     viewModel.insert(article)

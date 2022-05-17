@@ -15,6 +15,7 @@ import com.elkfrawy.akhbar.di.AppModule
 import com.elkfrawy.akhbar.model.Article
 import com.elkfrawy.akhbar.model.News
 import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.qualifiers.ActivityContext
 import java.net.URL
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -22,7 +23,7 @@ import java.util.*
 import javax.inject.Inject
 
 class NewsRecyclerAdapter
-    (val context:Context, val glide: RequestManager) : RecyclerView.Adapter<NewsRecyclerAdapter.viewHolder>() {
+    @Inject constructor (@ActivityContext var context:Context, var glide: RequestManager) : RecyclerView.Adapter<NewsRecyclerAdapter.viewHolder>() {
 
     lateinit var binding: NewsCardBinding
     lateinit var mListener: onViewClicked
@@ -72,7 +73,7 @@ class NewsRecyclerAdapter
                 n.saved = !n.saved
                 if (n.saved) {
                     holder.binding.saveArticle.visibility = View.GONE
-                    Toast.makeText(context, "Saved ${n.saved}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Saved", Toast.LENGTH_LONG).show()
                 }
                 else
                     holder.binding.saveArticle.setImageResource(R.drawable.ic_unsave)

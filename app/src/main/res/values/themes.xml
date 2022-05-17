@@ -12,5 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
     </style>
+
+    <color name="text_color">#000000</color>
+    <color name="search">@android:color/transparent</color>
+    <color name="hint">@android:color/darker_gray</color>
+
 </resources>
