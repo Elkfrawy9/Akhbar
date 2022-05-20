@@ -2,6 +2,7 @@
 
 i'm working on adding new features
 
+currently working on the same app with java and RxJava
 
 ## Languages, libraries and tools used
 - Kotlin
