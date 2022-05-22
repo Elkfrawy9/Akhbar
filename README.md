@@ -8,9 +8,9 @@ currently working on the same app with java and RxJava
 - Kotlin
 - Retrofit to get news and used gson converter
 - Room to save specific article
-- Koltin Coroutines
+- Coroutines
 - Navigation graph
-- dagger- Hilt
+- dagger-Hilt
 - Glide
 - MVVM
 
