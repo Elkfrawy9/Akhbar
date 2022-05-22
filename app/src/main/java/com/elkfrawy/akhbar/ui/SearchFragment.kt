@@ -52,7 +52,7 @@ class SearchFragment : Fragment() {
         binding.searchRecyclerView.adapter = adapter
         binding.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.getNewsLiveData().observe(viewLifecycleOwner){
+        viewModel.liveData.observe(viewLifecycleOwner){
             adapter.getNews(it.articles)
         }
 

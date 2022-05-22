@@ -32,7 +32,7 @@ import javax.inject.Inject
 class HomeFragment : Fragment() {
 
     @Inject lateinit var glide: RequestManager
-    @Inject lateinit var adapter: NewsRecyclerAdapter
+    @Inject lateinit var mAdapter: NewsRecyclerAdapter
     lateinit var binding: FragmentHomeBinding
     lateinit var controller: NavController
 
@@ -55,15 +55,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.apply {
+            recyclerView.apply {
+                adapter = mAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
 
-        viewModel.getNewsLiveData().observe(viewLifecycleOwner){
-            adapter.getNews(it.articles)
+
+        viewModel.liveData.observe(viewLifecycleOwner){
+            mAdapter.getNews(it.articles)
             binding.progressBar.visibility = View.GONE
         }
 
-        adapter.onViewClickedListener(object : NewsRecyclerAdapter.onViewClicked {
+        mAdapter.onViewClickedListener(object : NewsRecyclerAdapter.onViewClicked {
             override fun onSaveIconClickListener(article: Article) {
                 if (article.saved) {
                     viewModel.insert(article)

@@ -10,6 +10,7 @@ import com.elkfrawy.akhbar.data.NewsApi
 import com.elkfrawy.akhbar.model.Article
 import com.elkfrawy.akhbar.model.News
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -19,15 +20,16 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     val newsApi: NewsApi,
     val articleDao: ArticleDao,
+    val appScope:CoroutineScope
 ) : ViewModel() {
 
     private val _liveData:MutableLiveData<News> = MutableLiveData()
-    private val  liveData:LiveData<News> = _liveData
+    public val  liveData:LiveData<News> = _liveData
 
 
 
     fun getNews(){
-        viewModelScope.launch (Dispatchers.IO){
+        appScope.launch (Dispatchers.IO){
             val response = newsApi.getNews("us", API_KEY)
             if (response.isSuccessful){
                 response.body()?.let {
@@ -38,7 +40,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getSearchResult(text: String){
-        viewModelScope.launch (Dispatchers.IO){
+        appScope.launch (Dispatchers.IO){
             val response = newsApi.search(text, API_KEY)
             if (response.isSuccessful){
                 response.body()?.let {
@@ -48,19 +50,15 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getNewsLiveData():LiveData<News>{
-        return liveData
-    }
-
     fun insert(article: Article){
-        viewModelScope.launch(Dispatchers.IO) {
+        appScope.launch(Dispatchers.IO) {
             articleDao.insert(article)
         }
     }
 
 
     fun delete(article: Article){
-        viewModelScope.launch {
+        appScope.launch {
             articleDao.delete(article)
         }
     }
